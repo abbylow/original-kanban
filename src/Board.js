@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import List from './List';
 import { reduce } from 'lodash';
+import { Plus, Close } from 'mdi-material-ui';
+import { Button, TextField } from '@material-ui/core';
 
 export default class Board extends Component {
   state = {
@@ -20,7 +22,9 @@ export default class Board extends Component {
       { id: 7, title: 'Let the user to create another card', desc: '...', category: 'doing' },
       { id: 8, title: 'Handle the onclick event of each card', desc: '...', category: 'doing' },
       { id: 9, title: 'Make a slightly more complicated card UI', desc: '...', category: 'doing' },
-    ]
+    ],
+    showListForm: false,
+    listTitle: '',
   }
 
   dropItem = (listKey, cardId) => {
@@ -35,8 +39,40 @@ export default class Board extends Component {
     });
   }
 
+  addNewCard = (listKey) => {
+    //TODO: open a form to ask for title and desc
+    console.log('add a new card to ', listKey)
+    // this.setState({
+    //   cards: [
+    //     ...this.state.cards,
+    //     { id: 10, title: 'Make a slightly more complicated card UI', desc: '...', category: listKey },
+    //   ]
+    // });
+  }
+
+  addNewList = () => {
+    const listName = this.state.listTitle;
+    const listKey = listName.replace(/ /g,'').toLowerCase();
+    this.setState({
+      lists: {
+        ...this.state.lists,
+        [listKey]: { key: listKey, name: listName },
+      },
+      showListForm: false,
+      listTitle: '',
+    });
+  }
+
+  toggleListForm = () => {
+    this.setState({ showListForm: !this.state.showListForm });
+  }
+
+  updateListTitle = (e) => {
+    this.setState({ listTitle: e.target.value })
+  }
+
   render() {
-    const { lists, cards } = this.state;
+    const { lists, cards, showListForm, listTitle } = this.state;
 
     let listsWithCards = reduce(Object.keys(lists), (r, d) => {
       r[d] = {
@@ -56,10 +92,44 @@ export default class Board extends Component {
         {
           Object.values(listsWithCards).map(list =>
             (
-              <List list={list} key={list.key} dropItem={this.dropItem} />
+              <List list={list} key={list.key} dropItem={this.dropItem} addNewCard={this.addNewCard} />
             )
           )
         }
+        <div className='list-form'>
+          <div className='form-container'>
+            {
+              showListForm ?
+                (
+                  <div>
+                    <div className='title-field' >
+                      <TextField
+                        value={listTitle}
+                        placeholder='Enter list title...'
+                        InputProps={{ disableUnderline: true }} 
+                        onChange={this.updateListTitle}
+                      />
+                    </div>
+                    <div className='form-actions' >
+                      <Button color='primary' variant="contained" size='small' onClick={this.addNewList} >
+                        Add List
+                      </Button>
+                      <Button onClick={this.toggleListForm} size='small'>
+                        <Close />
+                      </Button>
+                    </div>
+                  </div>
+                )
+                :
+                (<Button className='form-btn' onClick={this.toggleListForm}>
+                  <Plus className='form-icon' fontSize='small' />
+                  <div className='form-text'>Add a new list</div>
+                </Button>)
+            }
+
+          </div>
+
+        </div>
       </div>
     );
   }

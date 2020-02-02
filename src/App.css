@@ -5,6 +5,7 @@
   width: 100vw;
   display: flex;
   flex-direction: column;
+  overflow-x: scroll;
 }
 
 .board {
@@ -25,7 +26,6 @@
   display: flex;
   flex-direction: column;
   max-height: 100vh;
-  overflow-y: scroll;
 }
 
 .list-header {
@@ -39,6 +39,8 @@
 .list-content{
   flex: 1;
   padding: 0.5em 0.75em;
+  max-height: 100vh;
+  overflow-y: scroll;
 }
 
 .cards {
@@ -54,9 +56,84 @@
   box-shadow: 0 2px 0 lightgray;
 }
 
+.card:last-child {
+  margin-bottom: 0;
+}
+
 .card-summary {
   font-size: 14px;
   line-height: 20px;
   font-weight: 400px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.list-footer {
+  padding: 0.5em 0.75em;
+  display: flex;
+}
+
+.footer-btn {
+  flex: 1;
+  display: flex;
+}
+
+.footer-icon {
+  margin-right: 0.25em;
+  color: #5e6c84;
+}
+
+.footer-text {
+  text-transform: none;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #5e6c84;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  flex: 1;
+}
+
+.list-form {
+  margin: 0 0.25em;
+}
+
+.form-container {
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 0.25em;
+  width: 18em;
+  display: flex;
+  flex-direction: column;
+  max-height: 100vh;
+  padding: 0.25em;
+}
+
+.form-btn {
+  flex: 1;
+  display: flex;
+}
+
+.form-icon {
+  margin-right: 0.25em;
+  color: white;
+}
+
+.form-text {
+  text-transform: none;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  flex: 1;
+}
+
+.title-field {
+  border: 2px solid #1976d2;
+  border-radius: 0.25em;
+  background-color: white;
+}
+
+.form-actions {
+  display: flex;
+  margin-top: 0.25em;
+  justify-content: space-between;
 }
