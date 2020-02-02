@@ -137,3 +137,7 @@
   margin-top: 0.25em;
   justify-content: space-between;
 }
+
+.card-form {
+  flex: 1;
+}

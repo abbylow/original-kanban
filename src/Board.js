@@ -13,15 +13,15 @@ export default class Board extends Component {
       'done': { key: 'done', name: 'Done' },
     },
     cards: [
-      { id: 1, title: 'Create a Kanban board', desc: '...', category: 'todo' },
-      { id: 2, title: 'Create multiple lists', desc: '...', category: 'todo' },
-      { id: 3, title: 'Create a few cards', desc: '...', category: 'doing' },
-      { id: 4, title: 'Categories the cards into the respective lists', desc: '...', category: 'done' },
-      { id: 5, title: 'Implement Drag and Drop', desc: '...', category: 'doing' },
-      { id: 6, title: 'Let the user to create another list', desc: '...', category: 'doing' },
-      { id: 7, title: 'Let the user to create another card', desc: '...', category: 'doing' },
-      { id: 8, title: 'Handle the onclick event of each card', desc: '...', category: 'doing' },
-      { id: 9, title: 'Make a slightly more complicated card UI', desc: '...', category: 'doing' },
+      { id: 1, title: 'Create a Kanban board', category: 'todo' },
+      { id: 2, title: 'Create multiple lists', category: 'todo' },
+      { id: 3, title: 'Create a few cards', category: 'doing' },
+      { id: 4, title: 'Categories the cards into the respective lists', category: 'done' },
+      { id: 5, title: 'Implement Drag and Drop', category: 'doing' },
+      { id: 6, title: 'Let the user to create another list', category: 'doing' },
+      { id: 7, title: 'Let the user to create another card', category: 'doing' },
+      { id: 8, title: 'Handle the onclick event of each card', category: 'doing' },
+      { id: 9, title: 'Make a slightly more complicated card UI', category: 'doing' },
     ],
     showListForm: false,
     listTitle: '',
@@ -39,20 +39,19 @@ export default class Board extends Component {
     });
   }
 
-  addNewCard = (listKey) => {
-    //TODO: open a form to ask for title and desc
-    console.log('add a new card to ', listKey)
-    // this.setState({
-    //   cards: [
-    //     ...this.state.cards,
-    //     { id: 10, title: 'Make a slightly more complicated card UI', desc: '...', category: listKey },
-    //   ]
-    // });
+  addNewCard = (listKey, cardTitle) => {
+    const nextId = this.state.cards.length + 1;
+    this.setState({
+      cards: [
+        ...this.state.cards,
+        { id: nextId, title: cardTitle, category: listKey },
+      ]
+    });
   }
 
   addNewList = () => {
     const listName = this.state.listTitle;
-    const listKey = listName.replace(/ /g,'').toLowerCase();
+    const listKey = listName.replace(/ /g, '').toLowerCase();
     this.setState({
       lists: {
         ...this.state.lists,
@@ -106,7 +105,7 @@ export default class Board extends Component {
                       <TextField
                         value={listTitle}
                         placeholder='Enter list title...'
-                        InputProps={{ disableUnderline: true }} 
+                        InputProps={{ disableUnderline: true }}
                         onChange={this.updateListTitle}
                       />
                     </div>
@@ -126,9 +125,7 @@ export default class Board extends Component {
                   <div className='form-text'>Add a new list</div>
                 </Button>)
             }
-
           </div>
-
         </div>
       </div>
     );
