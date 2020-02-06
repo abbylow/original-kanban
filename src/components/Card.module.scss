@@ -1,0 +1,20 @@
+@import '../constant.scss';
+
+.card {
+  padding: 0.75em;
+  margin-bottom: 0.75em;
+  background-color: white;
+  border-radius: 0.2em;
+  box-shadow: 0 2px 0 lightgray;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .card-summary {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import styles from './Board.module.scss';
 import List from './List';
 import { reduce } from 'lodash';
 import { Plus, Close } from 'mdi-material-ui';
@@ -29,7 +29,7 @@ export default class Board extends Component {
 
   dropItem = (listKey, cardId) => {
     const clonedCards = [...this.state.cards];
-    const cardIndex = clonedCards.findIndex(el => String(el.id) === cardId);
+    const cardIndex = clonedCards.findIndex(el => el.id == cardId);
     this.setState({
       cards: [
         ...clonedCards.slice(0, cardIndex),
@@ -87,7 +87,7 @@ export default class Board extends Component {
     });
 
     return (
-      <div className='board'>
+      <div className={styles['board']}>
         {
           Object.values(listsWithCards).map(list =>
             (
@@ -95,13 +95,13 @@ export default class Board extends Component {
             )
           )
         }
-        <div className='list-form'>
-          <div className='form-container'>
+        <div className={styles['list-form']}>
+          <div className={styles['form-container']}>
             {
               showListForm ?
                 (
                   <div>
-                    <div className='title-field' >
+                    <div className={styles['title-field']} >
                       <TextField
                         value={listTitle}
                         placeholder='Enter list title...'
@@ -109,7 +109,7 @@ export default class Board extends Component {
                         onChange={this.updateListTitle}
                       />
                     </div>
-                    <div className='form-actions' >
+                    <div className={styles['form-actions']} >
                       <Button color='primary' variant="contained" size='small' onClick={this.addNewList} >
                         Add List
                       </Button>
@@ -120,9 +120,9 @@ export default class Board extends Component {
                   </div>
                 )
                 :
-                (<Button className='form-btn' onClick={this.toggleListForm}>
-                  <Plus className='form-icon' fontSize='small' />
-                  <div className='form-text'>Add a new list</div>
+                (<Button className={styles['form-btn']} onClick={this.toggleListForm}>
+                  <Plus className={styles['form-icon']} fontSize='small' />
+                  <div className={styles['form-text']}>Add a new list</div>
                 </Button>)
             }
           </div>

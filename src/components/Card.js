@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import styles from './Card.module.scss';
 
 export default class Card extends Component {
   onDragStart = (e, cardId) => {
@@ -9,15 +9,14 @@ export default class Card extends Component {
   render() {
     const { card } = this.props;
     return (
-      <div className='card'
+      <div className={styles['card']}
         onDragStart={(e) => this.onDragStart(e, card.id)}
         draggable
       >
-        <div className='card-summary'>
+        <div className={styles['card-summary']}>
           {card.title}
         </div>
       </div>
     );
   }
-
 }

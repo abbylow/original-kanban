@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import styles from './List.module.scss'
 import Card from './Card';
 import { Plus, Close } from 'mdi-material-ui';
 import { Button, TextField } from '@material-ui/core';
@@ -35,14 +35,14 @@ export default class List extends Component {
     const { list } = this.props;
     const { cardTitle, showCardForm } = this.state;
     return (
-      <div className='list'
+      <div className={styles['list']}
         onDragOver={(e) => this.onDragOver(e)}
         onDrop={(e) => { this.onDrop(e, list.key) }}
       >
-        <div className='list-container'>
-          <div className='list-header'>{list.name}</div>
-          <div className='list-content'>
-            <div className='cards'>
+        <div className={styles['list-container']}>
+          <div className={styles['list-header']}>{list.name}</div>
+          <div className={styles['list-content']}>
+            <div className={styles['cards']}>
               {
                 list.cards.map(card =>
                   (
@@ -52,11 +52,11 @@ export default class List extends Component {
               }
             </div>
           </div>
-          <div className='list-footer'>
+          <div className={styles['list-footer']}>
             {
               showCardForm ?
-                (<div className='card-form'>
-                  <div className='title-field' >
+                (<div className={styles['card-form']}>
+                  <div className={styles['title-field']}>
                     <TextField
                       multiline
                       rows="3"
@@ -66,7 +66,7 @@ export default class List extends Component {
                       onChange={this.updateCardTitle}
                     />
                   </div>
-                  <div className='form-actions' >
+                  <div className={styles['form-actions']} >
                     <Button color='primary' variant="contained" size='small' onClick={() => this.handleAddCard(list.key, cardTitle)} >
                       Add Card
                     </Button>
@@ -76,9 +76,9 @@ export default class List extends Component {
                   </div>
                 </div>) :
                 (
-                  <Button className='footer-btn' onClick={this.toggleCardForm}>
-                    <Plus className='footer-icon' fontSize='small' />
-                    <div className='footer-text'>Add a new card</div>
+                  <Button className={styles['footer-btn']} onClick={this.toggleCardForm}>
+                    <Plus className={styles['footer-icon']} fontSize='small' />
+                    <div className={styles['footer-text']}>Add a new card</div>
                   </Button>
                 )
             }
